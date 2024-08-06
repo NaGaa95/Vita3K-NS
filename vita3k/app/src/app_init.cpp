@@ -311,7 +311,7 @@ bool init(EmuEnvState &state, Config &cfg, const Root &root_paths) {
         return false;
     };
 
-    if (!isSteamDeck()) {
+    if (isSteamDeck()) {
         float ddpi, hdpi, vdpi;
         SDL_GetDisplayDPI(0, &ddpi, &hdpi, &vdpi);
         window_type |= SDL_WINDOW_ALLOW_HIGHDPI;
