@@ -56,6 +56,11 @@ Vita3K is licensed under the **GPLv2** license. This is largely dictated by exte
 
 Please see [`building.md`](./building.md).
 
+# NS Build
+cmake --preset linux-ninja-clang
+
+cmake --build build/linux-ninja-clang --config Release make -j"$(nproc)"
+
 ## Running
 Look through the app list and click on the app you would like to run and click the start button.
 
