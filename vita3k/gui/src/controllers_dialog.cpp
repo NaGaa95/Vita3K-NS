@@ -24,6 +24,7 @@
 #include <gui/functions.h>
 
 #include <SDL_events.h>
+#include <SDL_version.h>
 
 namespace gui {
 
@@ -117,9 +118,11 @@ static void add_bind_to_table(GuiState &gui, EmuEnvState &emuenv, const SDL_Game
             }
             break;
         case SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_PRO:
+#if SDL_VERSION_ATLEAST(2, 24, 0)
         case SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_LEFT:
         case SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT:
         case SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_PAIR:
+#endif
             switch (btn) {
             case SDL_CONTROLLER_BUTTON_BACK: return "-";
             case SDL_CONTROLLER_BUTTON_START: return "+";
@@ -198,15 +201,18 @@ void draw_controllers_dialog(GuiState &gui, EmuEnvState &emuenv) {
         ImGui::Spacing();
         ImGui::Separator();
         ImGui::Spacing();
-        if (ImGui::BeginTable("main", 2, ImGuiTableFlags_NoSavedSettings | ImGuiTableFlags_BordersInnerV)) {
+        if (ImGui::BeginTable("main", 3, ImGuiTableFlags_NoSavedSettings | ImGuiTableFlags_BordersInnerV)) {
             ImGui::TableSetupColumn("num");
             ImGui::TableSetupColumn("name");
+            ImGui::TableSetupColumn("motion");
             ImGui::TableNextRow();
             ImGui::TableSetColumnIndex(0);
             ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", lang["num"].c_str());
             ImGui::TableSetColumnIndex(1);
             ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", lang["name"].c_str());
             ImGui::Spacing();
+            ImGui::TableSetColumnIndex(2);
+            ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", "Motion Support");
             for (auto i = 0; i < ctrl.controllers_num; i++) {
                 ImGui::TableNextRow();
                 ImGui::TableSetColumnIndex(0);
@@ -366,6 +372,8 @@ void draw_controllers_dialog(GuiState &gui, EmuEnvState &emuenv) {
 
                     ImGui::End();
                 }
+                ImGui::TableSetColumnIndex(2);
+                ImGui::Text("%s", ctrl.controllers_has_motion_support[i] ? common["yes"].c_str() : common["no"].c_str());
             }
             ImGui::EndTable();
         }
@@ -374,8 +382,9 @@ void draw_controllers_dialog(GuiState &gui, EmuEnvState &emuenv) {
 
     if (emuenv.ctrl.has_motion_support) {
         ImGui::Spacing();
+        if (ImGui::Checkbox("Disable Motion", &emuenv.cfg.disable_motion))
+            config::serialize_config(emuenv.cfg, emuenv.cfg.config_path);
         ImGui::PushTextWrapPos(ImGui::GetWindowWidth() - (ImGui::GetStyle().WindowPadding.x * 2.f));
-        ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", lang["motion_support"].c_str());
         ImGui::PopTextWrapPos();
     }
 
