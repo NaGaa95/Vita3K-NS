@@ -29,8 +29,8 @@
 #include <util/log.h>
 #include <util/safe_time.h>
 
-#include <SDL.h>
-#include <SDL_misc.h>
+#include <SDL3/SDL_cpuinfo.h>
+#include <SDL3/SDL_misc.h>
 #undef main
 
 #include <boost/algorithm/string/replace.hpp>
@@ -343,8 +343,8 @@ void draw_app_context_menu(GuiState &gui, EmuEnvState &emuenv, const std::string
                     if (has_state_report) {
                         const auto copy_vita3k_summary = [&]() {
                             const auto vita3k_summary = fmt::format(
-                                "# Vita3K summary\n- Version: {}\n- Build number: {}\n- Commit hash: https://github.com/vita3k/vita3k/commit/{}\n- CPU backend: {}\n- GPU backend: {}",
-                                app_version, app_number, app_hash, get_cpu_backend(gui, emuenv, app_path), emuenv.cfg.backend_renderer);
+                                "# Vita3K summary\n- Version: {}\n- Build number: {}\n- Commit hash: https://github.com/vita3k/vita3k/commit/{}\n- GPU backend: {}",
+                                app_version, app_number, app_hash, emuenv.cfg.backend_renderer);
                             ImGui::LogToClipboard();
                             ImGui::LogText("%s", vita3k_summary.c_str());
                             ImGui::LogFinish();
@@ -385,8 +385,8 @@ void draw_app_context_menu(GuiState &gui, EmuEnvState &emuenv, const std::string
 
                             // Create Vita3K summary
                             const auto vita3k_summary = fmt::format(
-                                "%23 Vita3K summary%0A- Version: {}%0A- Build number: {}%0A- Commit hash: https://github.com/vita3k/vita3k/commit/{}%0A- CPU backend: {}%0A- GPU backend: {}",
-                                app_version, app_number, app_hash, get_cpu_backend(gui, emuenv, app_path), emuenv.cfg.backend_renderer);
+                                "%23 Vita3K summary%0A- Version: {}%0A- Build number: {}%0A- Commit hash: https://github.com/vita3k/vita3k/commit/{}%0A- GPU backend: {}",
+                                app_version, app_number, app_hash, emuenv.cfg.backend_renderer);
 
 #ifdef _WIN32
                             const auto user = std::getenv("USERNAME");
@@ -622,7 +622,7 @@ void draw_app_context_menu(GuiState &gui, EmuEnvState &emuenv, const std::string
             ImGui::SetCursorPosX((display_size.x / 2.f) - ImGui::CalcTextSize((lang.info["parental_controls"] + "  ").c_str()).x);
             ImGui::TextColored(GUI_COLOR_TEXT, "%s  %s", lang.info["parental_controls"].c_str(), lang.info["level"].c_str());
             ImGui::SameLine();
-            ImGui::TextColored(GUI_COLOR_TEXT, "%d", *reinterpret_cast<const uint16_t *>(APP_INDEX->parental_level.c_str()));
+            ImGui::TextColored(GUI_COLOR_TEXT, "%s", APP_INDEX->parental_level.c_str());
             ImGui::Spacing();
             ImGui::SetCursorPosX((display_size.x / 2.f) - ImGui::CalcTextSize((lang.info["updated"] + "  ").c_str()).x);
             auto DATE_TIME = get_date_time(gui, emuenv, gui.app_selector.app_info.updated);

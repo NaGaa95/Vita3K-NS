@@ -54,7 +54,6 @@ std::vector<std::string>::iterator get_live_area_current_open_apps_list_index(Gu
 std::map<DateTime, std::string> get_date_time(GuiState &gui, EmuEnvState &emuenv, const tm &date_time);
 std::string get_unit_size(const size_t size);
 void get_app_param(GuiState &gui, EmuEnvState &emuenv, const std::string &app_path);
-std::string get_cpu_backend(GuiState &gui, EmuEnvState &emuenv, const std::string &app_path);
 void get_firmware_file(EmuEnvState &emuenv);
 void get_modules_list(GuiState &gui, EmuEnvState &emuenv);
 void get_notice_list(EmuEnvState &emuenv);
@@ -104,6 +103,7 @@ void save_apps_cache(GuiState &gui, EmuEnvState &emuenv);
 void save_user(GuiState &gui, EmuEnvState &emuenv, const std::string &user_id);
 void select_app(GuiState &gui, const std::string &title_id);
 void set_config(GuiState &gui, EmuEnvState &emuenv, const std::string &app_path);
+bool set_scroll_animation(float &scroll, float target_scroll, const std::string &target_id, std::function<void(float)> set_scroll);
 void set_shaders_compiled_display(GuiState &gui, EmuEnvState &emuenv);
 void update_app(GuiState &gui, EmuEnvState &emuenv, const std::string &app_path);
 void update_last_time_app_used(GuiState &gui, EmuEnvState &emuenv, const std::string &app);

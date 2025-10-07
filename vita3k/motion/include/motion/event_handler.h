@@ -17,28 +17,6 @@
 
 #pragma once
 
-#include <array>
-#include <memory>
-#include <stdexcept>
-
-namespace util {
-
-template <size_t MaxOutSize>
-std::string exec(const std::string &cmd) {
-    std::array<char, MaxOutSize> buffer;
-    std::string result;
-#ifdef _WIN32
-    std::unique_ptr<FILE, decltype(&_pclose)> pipe(_popen(cmd.c_str(), "r"), _pclose);
-#else
-    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
-#endif
-    if (!pipe) {
-        throw std::runtime_error("popen() failed!");
-    }
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-        result += buffer.data();
-    }
-    return result;
-}
-
-} // namespace util
+#include <SDL3/SDL_events.h>
+#include <emuenv/state.h>
+void handle_motion_event(EmuEnvState &emuenv, const SDL_GamepadSensorEvent &sensor);

@@ -1,6 +1,7 @@
 # Vita3K
 
 [![C/C++ CI](https://github.com/Vita3K/Vita3K/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/Vita3K/Vita3K/actions/workflows/c-cpp.yml)
+[![Release](https://img.shields.io/github/v/release/Vita3K/Vita3K-builds?include_prereleases)](https://github.com/Vita3K/Vita3K/releases)
 [![Vita3K discord server](https://img.shields.io/discord/408916678911459329?color=5865F2&label=Vita3K%20&logo=discord&logoColor=white)](https://discord.gg/6aGwQzh)
 
 ## Introduction
@@ -13,7 +14,7 @@ Vita3K is an experimental PlayStation Vita emulator for Windows, Linux, macOS an
 
 ## Compatibility
 
-The emulator currently runs most homebrew programs and some commercial games.
+The emulator currently runs most homebrew programs and commercial games.
 
 - [Homebrew compatibility page](https://vita3k.org/compatibility-homebrew.html)
 - [Commercial compatibility page](https://vita3k.org/compatibility.html)

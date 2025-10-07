@@ -140,21 +140,22 @@ extern const SysmoduleInternalPaths sysmodule_internal_paths = init_sysmodule_in
 
 // Current modules works for loading
 static constexpr auto auto_lle_modules = {
-    SCE_SYSMODULE_SAS,
-    SCE_SYSMODULE_PGF,
-    SCE_SYSMODULE_SYSTEM_GESTURE,
-    SCE_SYSMODULE_XML,
-    SCE_SYSMODULE_MP4,
-    SCE_SYSMODULE_ATRAC,
-    SCE_SYSMODULE_AVPLAYER,
-    SCE_SYSMODULE_JSON,
     SCE_SYSMODULE_HTTP,
     SCE_SYSMODULE_SSL,
     SCE_SYSMODULE_HTTPS,
-    SCE_SYSMODULE_SMART,
-    SCE_SYSMODULE_FACE,
     SCE_SYSMODULE_ULT,
-    SCE_SYSMODULE_FIOS2
+    SCE_SYSMODULE_SAS,
+    SCE_SYSMODULE_PGF,
+    SCE_SYSMODULE_FIOS2,
+    SCE_SYSMODULE_SYSTEM_GESTURE,
+    SCE_SYSMODULE_XML,
+    SCE_SYSMODULE_SQLITE,
+    SCE_SYSMODULE_MP4,
+    SCE_SYSMODULE_ATRAC,
+    SCE_SYSMODULE_FACE,
+    SCE_SYSMODULE_SMART,
+    SCE_SYSMODULE_AVPLAYER,
+    SCE_SYSMODULE_JSON
 };
 
 bool is_lle_module(SceSysmoduleModuleId module_id, EmuEnvState &emuenv) {
@@ -207,6 +208,5 @@ bool is_lle_module(const std::string &module_name, EmuEnvState &emuenv) {
 
 bool is_module_loaded(KernelState &kernel, SceSysmoduleModuleId module_id) {
     std::lock_guard<std::mutex> guard(kernel.mutex);
-    auto it = kernel.loaded_sysmodules.find(module_id);
-    return it != kernel.loaded_sysmodules.end();
+    return kernel.loaded_sysmodules.contains(module_id);
 }

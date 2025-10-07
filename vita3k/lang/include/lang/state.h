@@ -266,7 +266,7 @@ struct LangState {
         { "red", "Red" },
         { "green", "Green" },
         { "blue", "Blue" },
-        { "not_connected", "No compatible controllers connected.\nConnect a controller that is compatible with SDL2." },
+        { "not_connected", "No compatible controllers connected.\nConnect a controller that is compatible with SDL3." },
         { "disable_motion", "Disable Motion" },
         { "reset_controller_binding", "Reset Controller Binding" }
     };
@@ -531,9 +531,6 @@ struct LangState {
             { "manual_description", "Select Manual mode to load selected modules from the list below." }
         };
         std::map<std::string, std::string> cpu = {
-            { "unicorn", "Unicorn (deprecated)" },
-            { "cpu_backend", "CPU Backend" },
-            { "select_cpu_backend", "Select your preferred CPU backend." },
             { "cpu_opt", "Enable optimizations" },
             { "cpu_opt_description", "Check the box to enable additional CPU JIT optimizations." }
         };
@@ -667,7 +664,7 @@ struct LangState {
             { "stretch_the_display_area", "Stretch The Display Area" },
             { "stretch_the_display_area_description", "Check the box to enlarge the display area to fit the screen size." },
             { "fullscreen_hd_res_pixel_perfect", "Fullscreen HD res pixel perfect" },
-            { "fullscreen_hd_res_pixel_perfect_description", "Check the box to get a pixel perfect rendering with HD resolutions (1080p, 4K) in Fullscreen at the price of slight cropping at the top and the bottom of the screen." },
+            { "fullscreen_hd_res_pixel_perfect_description", "Check the box to get a pixel perfect rendering with HD resolutions (1080p, 4K) in fullscreen\nat the price of slight cropping at the top and the bottom of the screen." },
             { "apps_list_grid", "Grid Mode" },
             { "apps_list_grid_description", "Check the box to set the app list to grid mode." },
             { "icon_size", "App Icon Size" },
